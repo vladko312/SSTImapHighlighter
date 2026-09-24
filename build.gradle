@@ -1,0 +1,39 @@
+plugins {
+    id 'java'
+    // Upgraded to a version that supports PyCharm 2026.2.x
+    id 'org.jetbrains.intellij.platform' version '2.18.1'
+//    id 'org.gradle.toolchains.foojay-resolver-convention' version '0.8.0'
+}
+
+group = 'com.sstimap'
+version = '1.0'
+
+repositories {
+    mavenCentral()
+    intellijPlatform {
+        defaultRepositories()
+    }
+}
+
+dependencies {
+    intellijPlatform {
+        // Use the unified pycharm() helper for 2025.1 and later
+        pycharm("2026.2.2")
+        bundledPlugin("Pythonid")
+    }
+}
+
+intellijPlatform {
+    pluginConfiguration {
+        ideaVersion {
+            sinceBuild = '262'
+            untilBuild = '262.*'
+        }
+    }
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(25)
+    }
+}
